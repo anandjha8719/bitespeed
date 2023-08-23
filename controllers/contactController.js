@@ -18,20 +18,20 @@ function createContact(email, phoneNumber, linkPrecedence) {
 }
 
 function findContactByEmailOrPhone(email, phoneNumber) {
-    return new Promise((resolve, reject) => {
-      db.get(
-        `SELECT * FROM Contact WHERE email = ? OR phoneNumber = ?`,
-        [email, phoneNumber],
-        (err, row) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(row);
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT * FROM Contact WHERE email = ? OR phoneNumber = ?`,
+      [email, phoneNumber],
+      (err, row) => {
+        if (err) {
+          reject(err);
+          return;
         }
-      );
-    });
-  }
+        resolve(row);
+      }
+    );
+  });
+}
 
 function findSecondaryContacts(primaryContactId) {
   return new Promise((resolve, reject) => {
